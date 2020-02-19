@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>This is your profile</h1>
+
+<h3>Your game collection</h3>
+<p><a href="/user+game+list">Game Collection</a></p>
+
+<h3>Add game to your collection</h3>
+<p><a href="/add+game">Add game</a></p>
+
+<h3> Update your platform information </h3>
+<p><a href ="/update+profile">Update profile</a></p>
+
+<h3> Platform Information for Users</h3>
+   <ul>
+    {% for user in users %}
+        <h4> {{user.username}}</h4>
+      <li>
+         Xbox: {{ user.xbox_tag }}
+      </li>
+      <li>
+         PSN: {{ user.psn_tag }}
+      </li>
+      <li>
+          Nintendo: {{ user.nintendo_tag }}
+      </li>
+      <li>
+          Steam: {{ user.steam_tag }}
+      </li>
+      <li>
+         Twitch: {{ user.twitch_tag }}
+      </li>
+      <li>
+         Discord: {{ user.discord_tag }}
+      </li>
+    {% endfor %}
+  </ul>
+
+<h5>Log Out</h5>
+
+{% endblock %}
