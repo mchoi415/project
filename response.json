@@ -1,0 +1,846 @@
+[
+  {
+    "id": 121688,
+    "cover": 78323,
+    "name": "Final Fantasy",
+    "platforms": [
+      7,
+      24,
+      123
+    ],
+    "release_dates": [
+      174234,
+      174235,
+      174236,
+      174237,
+      174238,
+      174239,
+      174240,
+      174241
+    ]
+  },
+  {
+    "id": 121689,
+    "cover": 79944,
+    "name": "Final Fantasy",
+    "platforms": [
+      34,
+      37,
+      38,
+      39,
+      74
+    ],
+    "release_dates": [
+      174242,
+      174243,
+      174244,
+      174245,
+      174246,
+      174247,
+      174248,
+      174249,
+      174250
+    ]
+  },
+  {
+    "id": 36998,
+    "cover": 87768,
+    "name": "Pictlogica: Final Fantasy",
+    "platforms": [
+      20,
+      34,
+      39
+    ],
+    "release_dates": [
+      156274,
+      156275,
+      183021
+    ]
+  },
+  {
+    "id": 21899,
+    "cover": 87749,
+    "name": "Final Fantasy X: HD Remaster",
+    "platforms": [
+      46
+    ],
+    "release_dates": [
+      103095,
+      103096,
+      182997
+    ]
+  },
+  {
+    "id": 106819,
+    "cover": 77570,
+    "name": "Final Fantasy XIV: Complete Edition",
+    "platforms": [
+      6,
+      48
+    ],
+    "release_dates": [
+      156652,
+      156653
+    ]
+  },
+  {
+    "id": 413,
+    "cover": 78880,
+    "name": "Final Fantasy X-2",
+    "platforms": [
+      8
+    ],
+    "release_dates": [
+      57260,
+      57261,
+      57262,
+      57263
+    ]
+  },
+  {
+    "id": 411,
+    "cover": 78881,
+    "name": "Final Fantasy XI",
+    "platforms": [
+      6,
+      8,
+      12
+    ],
+    "release_dates": [
+      856,
+      3141,
+      3142
+    ]
+  },
+  {
+    "id": 127879,
+    "cover": 87662,
+    "name": "Final Fantasy VII \u0026 Final Fantasy VIII Remastered Twin Pack",
+    "platforms": [
+      130
+    ],
+    "release_dates": [
+      182907,
+      182908
+    ]
+  },
+  {
+    "id": 391,
+    "cover": 69732,
+    "name": "Dissidia Final Fantasy",
+    "platforms": [
+      38
+    ],
+    "release_dates": [
+      57462,
+      102595,
+      102596,
+      102597
+    ]
+  },
+  {
+    "id": 385,
+    "cover": 78125,
+    "name": "Final Fantasy",
+    "platforms": [
+      5,
+      18,
+      53,
+      99
+    ],
+    "release_dates": [
+      174121,
+      174122,
+      174123,
+      174124,
+      174125,
+      174126
+    ]
+  },
+  {
+    "id": 415,
+    "cover": 86156,
+    "name": "Final Fantasy: Mystic Quest",
+    "platforms": [
+      5,
+      19,
+      41,
+      47,
+      58
+    ],
+    "release_dates": [
+      23010,
+      23011,
+      23012,
+      23013,
+      23014,
+      23015,
+      23016,
+      139447,
+      139448,
+      139449,
+      139450
+    ]
+  },
+  {
+    "id": 80877,
+    "cover": 87611,
+    "name": "Final Fantasy XV: Royal Edition",
+    "platforms": [
+      48,
+      49
+    ],
+    "release_dates": [
+      166733,
+      166734
+    ]
+  },
+  {
+    "id": 14144,
+    "cover": 83779,
+    "name": "Final Fantasy X/X-2 HD Remaster",
+    "platforms": [
+      6,
+      9,
+      46,
+      48,
+      49,
+      130
+    ],
+    "release_dates": [
+      39761,
+      39762,
+      39763,
+      39764,
+      39765,
+      39766,
+      39767,
+      39768,
+      39770,
+      39771,
+      50530,
+      103121,
+      103122,
+      163297,
+      163298
+    ]
+  },
+  {
+    "id": 408,
+    "cover": 87766,
+    "name": "Final Fantasy I \u0026 II: Dawn of Souls",
+    "platforms": [
+      24
+    ],
+    "release_dates": [
+      181570,
+      181571
+    ]
+  },
+  {
+    "id": 24400,
+    "cover": 85525,
+    "name": "Dissidia Final Fantasy Opera Omnia",
+    "platforms": [
+      34,
+      39
+    ],
+    "release_dates": [
+      135776,
+      135777,
+      137155,
+      137156
+    ]
+  },
+  {
+    "id": 388,
+    "cover": 87522,
+    "name": "Final Fantasy IV: The After Years",
+    "platforms": [
+      5,
+      38,
+      56
+    ],
+    "release_dates": [
+      3177,
+      3178,
+      139436,
+      139437,
+      139438
+    ]
+  },
+  {
+    "id": 394,
+    "cover": 79892,
+    "name": "Final Fantasy Tactics: The War of the Lions",
+    "platforms": [
+      34,
+      38,
+      39,
+      45
+    ],
+    "release_dates": [
+      48682,
+      48683,
+      48684,
+      48685,
+      48686,
+      48687,
+      48689,
+      48690,
+      48691,
+      100525,
+      149973
+    ]
+  },
+  {
+    "id": 41848,
+    "cover": 87770,
+    "name": "Dissidia Duodecim Prologus: Final Fantasy",
+    "platforms": [
+      38
+    ],
+    "release_dates": [
+      183025,
+      183026,
+      183027
+    ]
+  },
+  {
+    "id": 420,
+    "cover": 403,
+    "name": "Final Fantasy: Chronicles",
+    "platforms": [
+      7
+    ],
+    "release_dates": [
+      182880
+    ]
+  },
+  {
+    "id": 14729,
+    "cover": 85228,
+    "name": "Final Fantasy XIV Online",
+    "platforms": [
+      6
+    ],
+    "release_dates": [
+      41088
+    ]
+  },
+  {
+    "id": 20655,
+    "cover": 87760,
+    "name": "Final Fantasy VI: Advance",
+    "platforms": [
+      24
+    ],
+    "release_dates": [
+      54074,
+      155034,
+      155035
+    ]
+  },
+  {
+    "id": 129157,
+    "name": "Final Fantasy XV Mobile",
+    "platforms": [
+      34,
+      39
+    ],
+    "release_dates": [
+      187561,
+      187562,
+      187563,
+      187564
+    ]
+  },
+  {
+    "id": 387,
+    "cover": 367,
+    "name": "Final Fantasy II",
+    "platforms": [
+      5,
+      7,
+      19,
+      24,
+      38,
+      41,
+      99
+    ],
+    "release_dates": [
+      723,
+      3173,
+      3174,
+      3175,
+      145674,
+      145675,
+      145676,
+      145677,
+      153905,
+      158381
+    ]
+  },
+  {
+    "id": 393,
+    "cover": 85229,
+    "name": "Final Fantasy III",
+    "platforms": [
+      6,
+      20,
+      34,
+      38,
+      39,
+      72,
+      74
+    ],
+    "release_dates": [
+      163150,
+      163151,
+      163152,
+      163153,
+      163154,
+      163155,
+      163156,
+      163157,
+      163158,
+      163159,
+      163160,
+      163161
+    ]
+  },
+  {
+    "id": 77234,
+    "cover": 70572,
+    "name": "Final Fantasy III",
+    "platforms": [
+      99
+    ],
+    "release_dates": [
+      163162
+    ]
+  },
+  {
+    "id": 16587,
+    "cover": 85530,
+    "name": "Final Fantasy IV",
+    "platforms": [
+      7,
+      19
+    ],
+    "release_dates": [
+      44615,
+      158635
+    ]
+  },
+  {
+    "id": 398,
+    "cover": 78882,
+    "name": "Final Fantasy XII",
+    "platforms": [
+      8
+    ],
+    "release_dates": [
+      31117,
+      31118,
+      31119,
+      31120
+    ]
+  },
+  {
+    "id": 119374,
+    "cover": 80517,
+    "name": "Final Fantasy VIII Remastered",
+    "platforms": [
+      6,
+      48,
+      49,
+      130
+    ],
+    "release_dates": [
+      174515,
+      174516,
+      174517,
+      174518
+    ]
+  },
+  {
+    "id": 406,
+    "cover": 87758,
+    "name": "Final Fantasy IV: Advance",
+    "platforms": [
+      24
+    ],
+    "release_dates": [
+      745
+    ]
+  },
+  {
+    "id": 6902,
+    "cover": 87540,
+    "name": "Theatrhythm: Final Fantasy",
+    "platforms": [
+      37,
+      39
+    ],
+    "release_dates": [
+      16861,
+      16862,
+      16863,
+      16864,
+      16865
+    ]
+  },
+  {
+    "id": 399,
+    "cover": 87751,
+    "name": "Final Fantasy IV",
+    "platforms": [
+      6,
+      20,
+      34,
+      39
+    ],
+    "release_dates": [
+      130584,
+      130585,
+      130586,
+      130587,
+      130588,
+      139435
+    ]
+  },
+  {
+    "id": 26981,
+    "cover": 87593,
+    "name": "Final Fantasy: Record Keeper",
+    "platforms": [
+      34,
+      39
+    ],
+    "release_dates": [
+      182874,
+      182875,
+      182876,
+      182877
+    ]
+  },
+  {
+    "id": 410,
+    "cover": 87754,
+    "name": "Final Fantasy Legend III",
+    "platforms": [
+      20,
+      33
+    ],
+    "release_dates": [
+      31245,
+      31246,
+      31247
+    ]
+  },
+  {
+    "id": 112412,
+    "cover": 72814,
+    "name": "Final Fantasy XIV: Shadowbringers",
+    "platforms": [
+      6,
+      48
+    ],
+    "release_dates": [
+      167360,
+      168052
+    ]
+  },
+  {
+    "id": 421,
+    "cover": 83775,
+    "name": "Final Fantasy IX",
+    "platforms": [
+      6,
+      7,
+      45,
+      48,
+      49,
+      130
+    ],
+    "release_dates": [
+      49718,
+      103082,
+      103083,
+      103084,
+      113519,
+      135676,
+      135677,
+      135678,
+      165069,
+      165087
+    ]
+  },
+  {
+    "id": 26625,
+    "cover": 85293,
+    "name": "Final Fantasy XIV: Stormblood",
+    "platforms": [
+      6,
+      14,
+      48
+    ],
+    "release_dates": [
+      63231,
+      63232,
+      63233,
+      103113,
+      103114
+    ]
+  },
+  {
+    "id": 66433,
+    "cover": 57057,
+    "name": "Final Fantasy: Unlimited with U"
+  },
+  {
+    "id": 80033,
+    "cover": 87527,
+    "name": "Before Crisis: Final Fantasy VII",
+    "platforms": [
+      55
+    ],
+    "release_dates": [
+      182850
+    ]
+  },
+  {
+    "id": 37291,
+    "cover": 87516,
+    "name": "Final Fantasy XV: Episode Ignis",
+    "platforms": [
+      45,
+      48,
+      49
+    ],
+    "release_dates": [
+      134653,
+      134654,
+      134972,
+      152303
+    ]
+  },
+  {
+    "id": 426,
+    "cover": 74198,
+    "name": "Final Fantasy VI",
+    "platforms": [
+      6,
+      7,
+      19,
+      24,
+      34,
+      39,
+      45,
+      47,
+      58
+    ],
+    "release_dates": [
+      22992,
+      22993,
+      22994,
+      22995,
+      22996,
+      22997,
+      22998,
+      22999,
+      23000,
+      23001,
+      23002,
+      23003,
+      23004,
+      23005,
+      23006,
+      23007,
+      23008,
+      23009,
+      47416
+    ]
+  },
+  {
+    "id": 359,
+    "cover": 85214,
+    "name": "Final Fantasy XV",
+    "platforms": [
+      6,
+      48,
+      49,
+      170
+    ],
+    "release_dates": [
+      110183,
+      110184,
+      133677,
+      133678,
+      136015,
+      147665,
+      179300
+    ]
+  },
+  {
+    "id": 418,
+    "cover": 85213,
+    "name": "Final Fantasy X",
+    "platforms": [
+      8
+    ],
+    "release_dates": [
+      3146
+    ]
+  },
+  {
+    "id": 37193,
+    "cover": 87517,
+    "name": "Final Fantasy XV: Episode Prompto",
+    "platforms": [
+      45,
+      48,
+      49
+    ],
+    "release_dates": [
+      85126,
+      85127,
+      103119,
+      103120
+    ]
+  },
+  {
+    "id": 28002,
+    "cover": 87518,
+    "name": "Final Fantasy XV: Episode Gladiolus",
+    "platforms": [
+      45,
+      48,
+      49
+    ],
+    "release_dates": [
+      67599,
+      67600,
+      103117,
+      103118
+    ]
+  },
+  {
+    "id": 427,
+    "cover": 85064,
+    "name": "Final Fantasy VII",
+    "platforms": [
+      6,
+      7,
+      39,
+      45,
+      48,
+      49,
+      130
+    ],
+    "release_dates": [
+      22956,
+      22957,
+      22958,
+      22961,
+      22962,
+      22963,
+      22964,
+      22965,
+      66673,
+      103091,
+      103092,
+      150025,
+      165067,
+      165125
+    ]
+  },
+  {
+    "id": 425,
+    "cover": 91094,
+    "name": "Final Fantasy VIII",
+    "platforms": [
+      6,
+      7,
+      45
+    ],
+    "release_dates": [
+      22969,
+      22970,
+      22971,
+      22972,
+      22975,
+      22976,
+      22977,
+      22978,
+      22979,
+      103093,
+      103094
+    ]
+  },
+  {
+    "id": 389,
+    "cover": 85218,
+    "name": "Final Fantasy XIII",
+    "platforms": [
+      6,
+      9,
+      12
+    ],
+    "release_dates": [
+      22476,
+      22477,
+      22478,
+      22479,
+      22480,
+      22482,
+      22485,
+      22486,
+      103102,
+      103103,
+      103104
+    ]
+  },
+  {
+    "id": 55034,
+    "cover": 63747,
+    "name": "Final Fantasy XV: Windows Edition",
+    "platforms": [
+      6
+    ],
+    "release_dates": [
+      147851
+    ]
+  },
+  {
+    "id": 26069,
+    "cover": 87515,
+    "name": "Final Fantasy XV: Season Pass Upgrade",
+    "platforms": [
+      48
+    ],
+    "release_dates": [
+      182846
+    ]
+  },
+  {
+    "id": 419,
+    "cover": 85533,
+    "name": "Final Fantasy V",
+    "platforms": [
+      5,
+      6,
+      7,
+      19,
+      24
+    ],
+    "release_dates": [
+      821,
+      823,
+      3147,
+      3148,
+      35905
+    ]
+  }
+]

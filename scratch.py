@@ -1,18 +1,12 @@
-import requests
 import json
+import requests
 
-url = "https://api-v3.igdb.com/search"
+url= 'https://api-v3.igdb.com/games'
+headers= {'user-key': '97bc20f840f5a7f739642f1b0615bb37'}
+args = {'fields': '*'}
+res = requests.get(url, headers=headers, params=args)
 
-payload = "fields game.name;\nsearch \"sonic\";"
-headers = {
-  'user-key': '97bc20f840f5a7f739642f1b0615bb37',
-  'Content-Type': 'application/json'
-}
+games = json.loads(res.text)
 
-response = requests.request("POST", url, headers=headers, data = payload)
-
-games = json.loads(response.text)
-
-for game in games:
-    print(game)
-
+with open("games.json", "w") as data_file:
+    json.dump(games, data_file, indent=2)

@@ -1,7 +1,24 @@
-<form action='/update+profile' method='POST'>
-  
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h2>Current information</h2>
+        Xbox: {{ user.xbox_tag }}
+    </br>
+        PSN: {{ user.psn_tag }}
+    </br>
+        Nintendo: {{ user.nintendo_tag }}
+    </br>
+        Steam: {{ user.steam_tag }}
+    </br>
+        Twitch: {{ user.twitch_tag }}
+    </br>
+        Discord: {{ user.discord_tag }}
+
     <h3> Update information</h3>
 
+<form action='/profile/update' method='POST'>
+    
         <label>Xbox:</label>
         <input type= 'text' id='xbox' name='xbox'>
 
@@ -16,7 +33,7 @@
         <input type='text' id='nintendo' name='nintendo'>
 
     </br></br>
-
+        
         <label>Steam:</label>
         <input type='text' id='steam' name='steam'>
 
@@ -33,3 +50,4 @@
     </br></br>
 
         <input type='submit' value='Update'>
+{% endblock %}

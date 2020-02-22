@@ -53,7 +53,10 @@ class Review(db.Model):
 
     __tablename__ = "reviews"
 
-    rating_id = db.Column(db.Integer, primary_key=True)
+    rating_id = db.Column(db.Integer,
+                          primary_key=True,
+                          autoincrement=True)
+    
     game_id = db.Column(db.Integer, db.ForeignKey('games.game_id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     rating = db.Column(db.Integer)
