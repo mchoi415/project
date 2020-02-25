@@ -42,8 +42,8 @@ class Game(db.Model):
                         )
 
     title = db.Column(db.String, nullable=False)
-    console = db.Column(db.String, nullable=False)
-    game_available_date = db.Column(db.DateTime)
+    console = db.Column(db.String)
+    game_available_date = db.Column(db.String)
     genre = db.Column(db.String)
     url_image = db.Column(db.String)
 

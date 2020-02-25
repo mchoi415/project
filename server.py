@@ -9,6 +9,8 @@ from sqlalchemy.exc import IntegrityError
 
 from model import User, Game, Review, connect_to_db, db
 
+import seed
+
 app = Flask(__name__)
 
 app.secret_key = 'secret'
@@ -30,13 +32,18 @@ def update_profile():
     user = User.query.filter_by(username=logged_user).first()
 
     #Figure out how to update new inputs from users!
-    
-    user.twitch_tag=twitch_tag
-    user.discord_tag=discord_tag
-    user.xbox_tag=xbox_tag
-    user.nintendo_tag=nintendo_tag
-    user.psn_tag=psn_tag
-    user.steam_tag=steam_tag
+    if twitch_tag != "":
+        user.twitch_tag=twitch_tag
+    if discord_tag != "":
+        user.discord_tag=discord_tag
+    if xbox_tag != "":
+        user.xbox_tag=xbox_tag
+    if nintendo_tag != "":
+        user.nintendo_tag=nintendo_tag
+    if psn_tag != "":
+        user.psn_tag=psn_tag
+    if steam_tag != "":
+        user.steam_tag=steam_tag
     db.session.commit()
 
     return redirect('/profile')
@@ -54,28 +61,137 @@ def profile_update():
 @app.route('/profile/list')
 def game_list():
     """Show user's list"""
+    
+    logged_user = session['current_user']
+    user = User.query.filter_by(username=logged_user).first()
+    user_id = user.user_id
+    game_reviews = Review.query.filter_by(user_id=user_id)
+    game_reviews = game_reviews.join(Game)
+    
 
-    return render_template('gameList.html')
 
 
-@app.route('/game/review', methods=['POST'])
+    return render_template('gameList.html', game_reviews=game_reviews)
+
+@app.route('/game/check', methods=['POST'])
 def add_game():
-    """Add game/review to database."""
+    """Check DB for game Add game into db if not there"""
 
     title = request.form.get('title')
+    
+
+    search_results = seed.search_games(title)
+    #print game list on console
+    print(search_results)
+
+    # for search_result in search_results:
+    search_results = search_results[0]
+    title = search_results['name']
+    session['title'] = title
+    print('hello')
+    print(title)
+
+    current_game = Game.query.filter_by(title=search_results['name']).first()
+
+    if current_game is None:
+    
+        title = search_results['name']
+
+        consoles = None
+        game_available_dates = None
+        genres = None
+        url_image_id = None
+
+
+        if 'platforms' in search_results.keys():
+            console_ids = search_results['platforms']
+            print('consoles ID:', console_ids)
+            consoles = seed.get_console(console_ids)
+            print('Consoles:', consoles)
+
+
+
+        if 'release_dates' in search_results.keys():
+            game_availabe_unixs = search_results['release_dates']
+            print('game_available_unixs:', game_availabe_unixs)
+            game_available_dates = seed.get_released_date(game_availabe_unixs)
+            print(game_available_dates)
+
+        if 'genres' in search_results.keys():
+            genre_ids = search_results['genres']
+            print('genre_ids:', genre_ids)
+            genres = seed.get_genre(genre_ids)
+            print(genres)
+
+        if 'cover' in search_results.keys():
+            url_image_id = search_results['cover']
+
+        # url_image = seed.get_image(url_image_id)
+
+
+        new_game = Game(title=title,
+                        console=consoles,
+                        #fix this
+                        game_available_date=game_available_dates,
+                        #fix this
+                        genre=genres,
+                        url_image='url')
+
+        db.session.add(new_game)
+        db.session.commit()
+
+    return redirect('/game/review')
+
+@app.route('/game/check', methods=['GET'])
+def get_game():
+    """Load template for game checking"""
+
+    return render_template('checkGame.html')
+
+@app.route('/game/review', methods=['POST'])
+def add_review():
+    """Add game/review to database."""
+
+    # title = request.form.get('title')
+
+    # search_results = seed.search_games(title)
+    # #print game list on console
+    # print(search_results)
+
+    # search_results = search_results[0]
+    # title = search_results['name']
+    # console = search_results['platforms']
+    # game_available_dates = search_results['release_dates']
+    # genre = search_results['platforms'] 
+    # url_image = search_results['cover']
+
+    # new_game = Game(title=title,
+    #                 console=console,
+    #                 #fix this
+    #                 game_available_dates= 1,
+    #                 #fix this
+    #                 genre='rpg',
+    #                 url_image=url_image)
+
+    # db.session.add(new_game)
+    # db.session.commit()
+
+
     rating = request.form.get('rating')
     comment = request.form.get('comment')
-    start_date = request.form.get('stat_date')
+    start_date = request.form.get('start_date')
     end_date = request.form.get('end_date')
-
-    # FIXME: get actual pk of game (instead of defaulting) to 1
-    game_id = request.form.get('game_id', 1)
+    title = session['title']
 
     logged_user = session['current_user']
 
     #Need user ID from DB
-    user = User.query.get(logged_user)
-    game = Game.query.get(game_id)
+    user = User.query.filter_by(username=logged_user).first()
+    user_id = user.user_id
+    game_name = Game.query.filter_by(title=title).first()
+    game_id = game_name.game_id
+
+
     # logged_id = user_info.user_id
 
     #Need game ID from DB
@@ -85,14 +201,16 @@ def add_game():
                         comment=comment,
                         start_date=start_date,
                         finish_date=end_date,
-                        user=user,
-                        game=game)
+                        user_id=user_id,
+                        game_id=game_id
+                        )
                         
                         #Figure out how to get user id from logged in user!
                         #Figure out how to get game id from user input for title!
                      
                       # user_id=User.query.get('user')
-                      
+    
+    new_game = Game(title=title)
         
     db.session.add(new_review)
     db.session.commit()
@@ -101,7 +219,7 @@ def add_game():
 
 
 @app.route('/game/review', methods=['GET'])
-def get_game():
+def get_review():
     """Get game info from user"""
 
     # get all games from db
@@ -147,6 +265,10 @@ def register_user():
         
         db.session.add(new_user)
         db.session.commit()
+
+        user_username = User.query.filter_by(username=username).first()
+        session['current_user'] = username
+        flash(f'Logged in as {username}')       
         return redirect('/profile')
 
     except IntegrityError:
@@ -158,6 +280,10 @@ def register_user():
 def get_register():
     """Render template for register users."""
 
+    # if session['current_user'] != None:
+    #     return redirect('/profile')
+
+    # else:
     return render_template('register.html')
 
 
@@ -174,6 +300,12 @@ def user_logout():
 @app.route('/login', methods=['GET'])
 def get_login():
     """get login template"""
+
+# if session['current_user'] != None:
+            
+#             return redirect('/profile')
+        
+
 
     return render_template('login.html')
 
