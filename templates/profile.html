@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>This is your profile</h1>
+<h1>This is your profile, {{ user.username }}</h1>
 
 <h3>Your game collection</h3>
 <p><a href="/profile/list">Game Collection</a></p>
@@ -12,7 +12,7 @@
 <h3> Update your platform information </h3>
 <p><a href ="/profile/update">Update profile</a></p>
 
-<h3> Platform Information for {{ user.username }}</h3>
+<h3> Your platform Information, {{ user.username }}</h3>
    <ul>
       <li>
          Xbox: {{ user.xbox_tag }}
@@ -34,6 +34,19 @@
       </li>
   
   </ul>
+
+  <h4>Other Users</h4>
+
+  <ul>
+    {% for other_user in other_users %}
+      <li>
+        <a href="/profile/{{ other_user.username }}">
+          {{ other_user.username }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+
 
 <p><a href="/logout">Log out</a></p>
 

@@ -67,13 +67,21 @@ def game_list():
     user_id = user.user_id
     game_reviews = Review.query.filter_by(user_id=user_id)
     game_reviews = game_reviews.join(Game)
-    
-
 
 
     return render_template('gameList.html', game_reviews=game_reviews)
 
-@app.route('/game/check', methods=['POST'])
+@app.route('/game/add')
+def add_game():
+    """Add user's picked game into their list."""
+
+
+@app.route('/game/result')
+def show_search_result():
+    """Show user search results and pick the right game."""
+
+
+@app.route('/game/search', methods=['POST'])
 def add_game():
     """Check DB for game Add game into db if not there"""
 
@@ -88,8 +96,7 @@ def add_game():
     search_results = search_results[0]
     title = search_results['name']
     session['title'] = title
-    print('hello')
-    print(title)
+
 
     current_game = Game.query.filter_by(title=search_results['name']).first()
 
@@ -105,23 +112,16 @@ def add_game():
 
         if 'platforms' in search_results.keys():
             console_ids = search_results['platforms']
-            print('consoles ID:', console_ids)
             consoles = seed.get_console(console_ids)
-            print('Consoles:', consoles)
-
-
+          
 
         if 'release_dates' in search_results.keys():
             game_availabe_unixs = search_results['release_dates']
-            print('game_available_unixs:', game_availabe_unixs)
             game_available_dates = seed.get_released_date(game_availabe_unixs)
-            print(game_available_dates)
 
         if 'genres' in search_results.keys():
             genre_ids = search_results['genres']
-            print('genre_ids:', genre_ids)
             genres = seed.get_genre(genre_ids)
-            print(genres)
 
         if 'cover' in search_results.keys():
             url_image_id = search_results['cover']
@@ -222,11 +222,32 @@ def add_review():
 def get_review():
     """Get game info from user"""
 
+    title = session['title']
     # get all games from db
     # give list of gmes to jinja
     # in jinja make a selext with options that have game info
-    return render_template('addGame.html')
+    return render_template('addGame.html', title=title)
 
+@app.route('/profile/<username>/list')
+def show_other_collection(username):
+    """Show other user game collection."""
+
+    user = User.query.filter_by(username=username).first()
+    user_id = user.user_id
+    game_reviews = Review.query.filter_by(user_id=user_id)
+    game_reviews = game_reviews.join(Game)
+
+
+    return render_template('otherGameList.html', game_reviews=game_reviews)
+
+
+@app.route('/profile/<username>')
+def show_other_profile(username):
+    """Show another user's profile."""
+
+    user = User.query.filter_by(username=username).first()
+
+    return render_template('otherProfile.html', user=user)
 
 @app.route('/profile')
 def show_profile():
@@ -234,8 +255,9 @@ def show_profile():
     
     logged_user = session['current_user']
     user = User.query.filter_by(username=logged_user).first()
+    other_users = User.query.all()
 
-    return render_template('profile.html', user=user)
+    return render_template('profile.html', user=user, other_users=other_users)
 
 @app.route('/register', methods=['POST'])
 def register_user():
@@ -280,10 +302,6 @@ def register_user():
 def get_register():
     """Render template for register users."""
 
-    # if session['current_user'] != None:
-    #     return redirect('/profile')
-
-    # else:
     return render_template('register.html')
 
 
@@ -300,11 +318,6 @@ def user_logout():
 @app.route('/login', methods=['GET'])
 def get_login():
     """get login template"""
-
-# if session['current_user'] != None:
-            
-#             return redirect('/profile')
-        
 
 
     return render_template('login.html')
@@ -338,6 +351,7 @@ def user_login():
 @app.route('/')
 def homepage():
     """Homepage"""
+
 
     return render_template('homepage.html')
 

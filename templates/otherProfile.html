@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>This is {{ user.username }}'s profile</h1>
+
+<h3>Their game collection</h3>
+<p><a href="/profile/{{ user.username }}/list">Game Collection</a></p>
+
+
+<h3> Platform Information for {{ user.username }}</h3>
+   <ul>
+      <li>
+         Xbox: {{ user.xbox_tag }}
+      </li>
+      <li>
+         PSN: {{ user.psn_tag }}
+      </li>
+      <li>
+          Nintendo: {{ user.nintendo_tag }}
+      </li>
+      <li>
+          Steam: {{ user.steam_tag }}
+      </li>
+      <li>
+         Twitch: {{ user.twitch_tag }}
+      </li>
+      <li>
+         Discord: {{ user.discord_tag }}
+      </li>
+  
+  </ul>
+
+  <h4>Go back to your profile</h4>
+  <a href="/profile">Your Profile</a>
+
+  <a href="/logout">Log out</a></p>
+
+{% endblock %}
