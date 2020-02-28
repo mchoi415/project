@@ -7,7 +7,9 @@
   <ul>
     {% for game_review in game_reviews %}
       <li>
-          Title: {{ game_review.game.title }} | Rating: {{ game_review.rating }} out of 5 | Comments: {{ game_review.comment }} | Start Date: {{ game_review.start_date }} | Finished Date: {{ game_review.finish_date }}
+          Title:<a href="/game/{{ game_review.game.game_id }}">
+         {{ game_review.game.title }} 
+        </a>| Rating: {{ game_review.rating }} out of 5 | Comments: {{ game_review.comment }} | Start Date: {{ game_review.start_date }} | Finished Date: {{ game_review.finish_date }}
         </a>
       </li>
     {% endfor %}

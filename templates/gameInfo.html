@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3> {{ game.title }} </h3>
+   <ul>
+    <li>
+        Game Cover : <img src="{{ game.url_image }}" alt=" {{ game.title }}">
+      </li>
+      <li>
+         Platform(s): {{ game.console }}
+      </li>
+      <li>
+         Release Date(s): {{ game.game_available_date }}
+      </li>
+      <li>
+         Genre(s): {{ game.genre }}
+      </li>
+    
+  </ul>
+
+</br>
+<a href="/profile">Go to your Profile</a>
+
+<p><a href="/logout">Log out</a></p>
+
+{% endblock %}

@@ -40,7 +40,7 @@ class Game(db.Model):
                         primary_key=True,
                         autoincrement=True
                         )
-
+    igdb_id = db.Column(db.Integer)
     title = db.Column(db.String, nullable=False)
     console = db.Column(db.String)
     game_available_date = db.Column(db.String)
@@ -62,7 +62,7 @@ class Review(db.Model):
     rating = db.Column(db.Integer)
     comment = db.Column(db.String)
     start_date = db.Column(db.DateTime)
-    finish_date = db.Column(db.DateTime)
+    finish_date = db.Column(db.DateTime, nullable=True)
 
     user = db.relationship("User", backref="reviews")
     game = db.relationship("Game", backref="reviews")

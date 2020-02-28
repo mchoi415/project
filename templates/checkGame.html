@@ -1,10 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-    <form action='/game/check' method='POST'>
+    <form action='/game/search' method='POST'>
      <h2>Title of Game</h2>
 
         <input type='text' id='title' name='title'>
@@ -14,3 +17,5 @@
     </form>
 </body>
 </html>
+
+{% endblock %}

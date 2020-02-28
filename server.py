@@ -58,6 +58,16 @@ def profile_update():
 
     return render_template('updateProfile.html', user=user)
 
+@app.route('/game/<game_id>')
+def show_game_info(game_id):
+    """Show game information to user."""
+    print(game_id)
+
+    game = Game.query.filter_by(game_id=game_id).first()
+
+    return render_template('gameInfo.html', game=game)
+
+
 @app.route('/profile/list')
 def game_list():
     """Show user's list"""
@@ -71,38 +81,29 @@ def game_list():
 
     return render_template('gameList.html', game_reviews=game_reviews)
 
-@app.route('/game/add')
-def add_game():
-    """Add user's picked game into their list."""
 
+@app.route('/game/results', methods=['POST'])
+def get_search_result():
 
-@app.route('/game/result')
-def show_search_result():
-    """Show user search results and pick the right game."""
+    current_id = request.form.get('title')
+    print(current_id)
 
+    if current_id == 'None':
 
-@app.route('/game/search', methods=['POST'])
-def add_game():
-    """Check DB for game Add game into db if not there"""
-
-    title = request.form.get('title')
+        flash('Please search again')
+        return redirect('/game/search')
     
-
-    search_results = seed.search_games(title)
-    #print game list on console
-    print(search_results)
-
-    # for search_result in search_results:
-    search_results = search_results[0]
-    title = search_results['name']
-    session['title'] = title
+    title = seed.get_game_by_id(current_id)
+    print(title)
 
 
-    current_game = Game.query.filter_by(title=search_results['name']).first()
+    current_game = Game.query.filter_by(game_id=current_id).first()
 
     if current_game is None:
-    
+
+        search_results = seed.get_game_by_id(current_id)[0]
         title = search_results['name']
+        igdb_id = search_results['id']
 
         consoles = None
         game_available_dates = None
@@ -124,25 +125,69 @@ def add_game():
             genres = seed.get_genre(genre_ids)
 
         if 'cover' in search_results.keys():
-            url_image_id = search_results['cover']
+            cover_id = search_results['cover']
+            url_image=seed.get_cover_url_by_id(igdb_id)
+
 
         # url_image = seed.get_image(url_image_id)
 
 
         new_game = Game(title=title,
+                        igdb_id=igdb_id,
                         console=consoles,
                         #fix this
                         game_available_date=game_available_dates,
                         #fix this
                         genre=genres,
-                        url_image='url')
+                        url_image=url_image)
+        
 
         db.session.add(new_game)
         db.session.commit()
 
+    session['title'] = title
+
     return redirect('/game/review')
 
-@app.route('/game/check', methods=['GET'])
+@app.route('/game/results', methods=['GET'])
+def show_search_result():
+    """Show user search results and pick the right game."""
+
+    title = session['title']
+
+    search_results = seed.search_games(title)
+
+    # for game in search_results:
+    #     titles.append(game['name']) 
+
+    # titles = [game['name'] for game in search_results[:5]]
+
+
+    return render_template('searchResults.html',
+                        titles=search_results)
+
+    
+
+@app.route('/game/search', methods=['POST'])
+def add_game():
+    """Check DB for game Add game into db if not there"""
+
+    title = request.form.get('title')
+    
+
+    search_results = seed.search_games(title)
+    #print game list on console
+    print(search_results)
+
+    # for search_result in search_results:
+    # search_results = search_results[0]
+    # title = search_results['name']
+    session['title'] = title
+
+
+    return redirect('/game/results')
+
+@app.route('/game/search', methods=['GET'])
 def get_game():
     """Load template for game checking"""
 
@@ -151,31 +196,6 @@ def get_game():
 @app.route('/game/review', methods=['POST'])
 def add_review():
     """Add game/review to database."""
-
-    # title = request.form.get('title')
-
-    # search_results = seed.search_games(title)
-    # #print game list on console
-    # print(search_results)
-
-    # search_results = search_results[0]
-    # title = search_results['name']
-    # console = search_results['platforms']
-    # game_available_dates = search_results['release_dates']
-    # genre = search_results['platforms'] 
-    # url_image = search_results['cover']
-
-    # new_game = Game(title=title,
-    #                 console=console,
-    #                 #fix this
-    #                 game_available_dates= 1,
-    #                 #fix this
-    #                 genre='rpg',
-    #                 url_image=url_image)
-
-    # db.session.add(new_game)
-    # db.session.commit()
-
 
     rating = request.form.get('rating')
     comment = request.form.get('comment')
@@ -238,7 +258,7 @@ def show_other_collection(username):
     game_reviews = game_reviews.join(Game)
 
 
-    return render_template('otherGameList.html', game_reviews=game_reviews)
+    return render_template('otherGameList.html', game_reviews=game_reviews, username=username)
 
 
 @app.route('/profile/<username>')

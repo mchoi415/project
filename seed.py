@@ -5,7 +5,6 @@ from model import Review
 from datetime import datetime
 
 from model import connect_to_db, db
-from server import app
 
 import json
 import requests
@@ -20,14 +19,54 @@ def search_games(search):
         'Accept': 'application/json'
     }
 
-    data = 'fields name, platforms, genres, release_dates, cover; limit 1; search "{0}";'.format(search)
+    data = 'fields name, platforms, genres, release_dates, cover; limit 50; search "{0}";'.format(search)
 
     json_data = requests.get(url=url, headers=headers, data=data).json()
     return json_data
     # print(type(json_data))
 
-    # for game in json_data:
-    #     print(game['name'])
+    for game in json_data:
+        print(game['name'])
+
+
+def get_game_by_id(game_id):
+
+    url = 'https://api-v3.igdb.com/games'
+    headers = {
+        'user-key':'97bc20f840f5a7f739642f1b0615bb37',
+        'Accept': 'application/json'
+    }
+
+    data = '''fields name, platforms, genres, release_dates, cover;
+              where id = {0};
+              limit 5;'''.format(game_id)
+    print(data)
+
+    json_data = requests.get(url=url, headers=headers, data=data).json()
+    return json_data
+    # print(type(json_data))
+
+    for game in json_data:
+        print(game['name'])    
+
+def get_cover_url_by_id(igdb_id):
+    """Get cover image from game's id."""
+
+    url = 'https://api-v3.igdb.com/covers'
+    headers = {
+        'user-key':'97bc20f840f5a7f739642f1b0615bb37',
+        'Accept': 'application/json'
+    }
+
+    data = '''fields url;
+              where game = {0};
+              limit 1;'''.format(igdb_id)
+
+    image_url = requests.get(url=url, headers=headers, data=data).json()
+    image_url = image_url[0]
+    image_url =image_url['url']
+    return image_url
+
 
 def get_genre(genre_ids):
     """Convert genre ID to genre"""
