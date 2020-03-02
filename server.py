@@ -84,6 +84,7 @@ def game_list():
 
 @app.route('/game/results', methods=['POST'])
 def get_search_result():
+    """Add search results into db."""
 
     current_id = request.form.get('title')
     print(current_id)
@@ -123,7 +124,7 @@ def get_search_result():
         if 'genres' in search_results.keys():
             genre_ids = search_results['genres']
             genres = seed.get_genre(genre_ids)
-
+ 
         if 'cover' in search_results.keys():
             cover_id = search_results['cover']
             url_image=seed.get_cover_url_by_id(igdb_id)
@@ -199,8 +200,15 @@ def add_review():
 
     rating = request.form.get('rating')
     comment = request.form.get('comment')
+    if comment == '':
+        comment = None
+
     start_date = request.form.get('start_date')
+
     end_date = request.form.get('end_date')
+    if end_date =='':
+        end_date = None
+
     title = session['title']
 
     logged_user = session['current_user']
@@ -367,6 +375,65 @@ def user_login():
             flash('Incorrect username or password')
             return redirect('/login')
 
+@app.route('/search/<igdb_game_id>')
+def show_search_game_info(igdb_game_id):
+    """"Show searched game info."""
+
+    game_info = seed.get_game_by_id(igdb_game_id)[0]
+    print(game_info)
+    
+    game_cover = None
+    game_genre = None
+    game_consoles = None
+    release_dates = None
+
+    if 'cover' in game_info.keys():
+        game_cover = seed.get_cover_url_by_id(igdb_game_id)
+    
+    if 'genres' in game_info.keys():
+        game_genre = seed.get_genre(game_info['genres'])
+
+    if 'platforms' in game_info.keys():
+        game_consoles = seed.get_console(game_info['platforms'])
+
+    if 'release_dates' in game_info.keys():
+        release_dates = seed.get_released_date(game_info['release_dates'])
+
+
+    return render_template('gameSearchInfo.html',
+        game_info=game_info,
+        cover=game_cover,
+        genre=game_genre,
+        consoles=game_consoles,
+        release_dates=release_dates)
+
+@app.route('/search/results')
+def results_game():
+    """Show results of the user's (db) search."""
+
+    search_results = seed.search_games(session['search'])    
+
+
+    return render_template('gameSearchResults.html',
+        search_results=search_results)
+
+
+@app.route('/search', methods=['POST'])
+def search_game():
+    """Save (db) search game to pass into results."""
+
+    search = request.form.get('search')
+    print('from first page', search)
+    session['search'] = search
+
+    return redirect('/search/results')
+
+
+@app.route('/search')
+def search():
+    """search game through igdb database for user."""
+
+    return render_template('searchGame.html')
 
 @app.route('/')
 def homepage():

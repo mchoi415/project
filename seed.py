@@ -51,7 +51,7 @@ def get_game_by_id(game_id):
 
 def get_cover_url_by_id(igdb_id):
     """Get cover image from game's id."""
-
+    print('id', igdb_id)
     url = 'https://api-v3.igdb.com/covers'
     headers = {
         'user-key':'97bc20f840f5a7f739642f1b0615bb37',
@@ -63,6 +63,9 @@ def get_cover_url_by_id(igdb_id):
               limit 1;'''.format(igdb_id)
 
     image_url = requests.get(url=url, headers=headers, data=data).json()
+    print('imageurl')
+    print(image_url)
+
     image_url = image_url[0]
     image_url =image_url['url']
     return image_url

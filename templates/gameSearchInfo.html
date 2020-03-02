@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3> {{ game_info.name }} </h3>
+   <ul>
+    <li>
+        Game Cover : <img src="{{ cover }}" alt=" {{ game_info.name }}">
+      </li>
+      <li>
+         Platform(s): {{ consoles }}
+      </li>
+      <li>
+         Release Date(s): {{ release_dates }}
+      </li>
+      <li>
+         Genre(s): {{ genre }}
+      </li>
+    
+  </ul>
+
+</br>
+<a href="/search">Search another game</a>
+
+<p><a href="/">Back to homepage</a></p>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div>
+    <h2> Search Game for information </h2>
+    <form action="/search" method="POST">
+        <input type="text" id="search" name="search">
+    <br>
+        <input type='submit'>
+    </form>
+</div>
+</br>
+</br>
+<a href="/">Back to homepage</a>
+
+{% endblock %}

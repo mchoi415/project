@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results</title>
+</head>
+    <body>
+        <h2> Click for info </h2>
+          
+        {% for game in search_results %}
+                <label><a href="/search/{{ game['id'] }}"> {{ game.name }}</a></label>
+        </br>
+        {% endfor %}
+        <h3>Not what you're looking for?</h3>
+        <a href="/search">Search again</a>                
+
+    </body>
+</html>
