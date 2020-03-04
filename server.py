@@ -58,6 +58,7 @@ def profile_update():
 
     return render_template('updateProfile.html', user=user)
 
+
 @app.route('/game/<game_id>')
 def show_game_info(game_id):
     """Show game information to user."""
@@ -215,9 +216,7 @@ def add_review():
 
     #Need user ID from DB
     user = User.query.filter_by(username=logged_user).first()
-    user_id = user.user_id
-    game_name = Game.query.filter_by(title=title).first()
-    game_id = game_name.game_id
+    game = Game.query.filter_by(title=title).first()
 
 
     # logged_id = user_info.user_id
@@ -229,16 +228,14 @@ def add_review():
                         comment=comment,
                         start_date=start_date,
                         finish_date=end_date,
-                        user_id=user_id,
-                        game_id=game_id
+                        game=game
                         )
                         
                         #Figure out how to get user id from logged in user!
                         #Figure out how to get game id from user input for title!
                      
                       # user_id=User.query.get('user')
-    
-    new_game = Game(title=title)
+    user.reviews.append(new_review)
         
     db.session.add(new_review)
     db.session.commit()
@@ -261,13 +258,16 @@ def show_other_collection(username):
     """Show other user game collection."""
 
     user = User.query.filter_by(username=username).first()
-    user_id = user.user_id
-    game_reviews = Review.query.filter_by(user_id=user_id)
-    game_reviews = game_reviews.join(Game)
 
+    return render_template('otherGameList.html',
+                           game_reviews=user.reviews,
+                           username=username)
 
-    return render_template('otherGameList.html', game_reviews=game_reviews, username=username)
+@app.route('/profile/<username>/messages')
+def show_other_messages(username):
+    """Show other user messages."""
 
+    return render_template('otherMessages.html')
 
 @app.route('/profile/<username>')
 def show_other_profile(username):
@@ -277,6 +277,28 @@ def show_other_profile(username):
 
     return render_template('otherProfile.html', user=user)
 
+@app.route('/profile/messages', methods=['POST'])
+def upload_message():
+
+    message = request.form.get('message')
+    author = User.query.filter_by(username=session['username']).first()
+    author_id = user.user_id
+
+
+    new_comment = Comment(comment= message,
+                          author_id=author_id)
+
+    
+
+    
+    return redirect('/profile/messages')
+
+@app.route('/profile/messages', methods=['GET'])
+def show_message():
+    """Render user's message board"""
+
+    return render_template('messageBoard.html')
+
 @app.route('/profile')
 def show_profile():
     """Show user's profile after login/register."""
@@ -284,6 +306,9 @@ def show_profile():
     logged_user = session['current_user']
     user = User.query.filter_by(username=logged_user).first()
     other_users = User.query.all()
+
+    message = request.form.get('message')
+    print(message)
 
     return render_template('profile.html', user=user, other_users=other_users)
 

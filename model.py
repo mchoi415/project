@@ -1,6 +1,7 @@
 """Databass for project"""
 
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 db = SQLAlchemy()
 
@@ -24,7 +25,11 @@ class User(db.Model):
     psn_tag = db.Column(db.String)
     steam_tag = db.Column(db.String)
 
+    # reviews: a list of Review objects
     games = db.relationship("Game", secondary="reviews", backref="users")
+    comments = db.relationship('Comment',
+                               secondary='users_comments',
+                               backref='users')
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -67,6 +72,47 @@ class Review(db.Model):
     user = db.relationship("User", backref="reviews")
     game = db.relationship("Game", backref="reviews")
 
+class GroupFinder(db.Model)
+    """Data model for LFG games."""
+
+    __tablename__ = "groupfinders"
+
+    lfg_id = db.Column(db.Integer,
+                       primary_key=True,
+                       autoincrement=True)
+
+    game_id = db.Column(db.Integer, db.ForeignKey('games.game_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    comment = db.Column(db.String)
+    lfg = db.Column(db.Boolean)
+    
+    user = db.relationship("User", backref='groupfinders')
+    gmae = db.realtionship("Game", backref='groupfinders')
+
+
+class Comment(db.Model):
+
+    __tablename__ = "comments"
+
+    comment_id = db.Column(db.Integer,
+                           primary_key=True,
+                           autoincrement=True)
+
+    author_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    comment = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, default=datetime.now)
+
+    author = db.relationship('User', backref='comments_written')
+
+
+class UserComment(db.Model):
+    __tablename__ = 'users_comments'
+
+    user_comment_id = db.Column(db.Integer,
+                                primary_key=True,
+                                autoincrement=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    comment_id = db.Column(db.Integer, db.ForeignKey('comments.comment_id'))
 
 
 ########################
