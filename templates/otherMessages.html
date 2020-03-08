@@ -2,7 +2,7 @@
 {% block content %}
 
 <h1>Message Board</h1>
-<form action='/profile/messages' method="POST">
+<form action='/profile/{{ username }}/messages' method="POST">
 
 <ul>
     {% for message in messages %}
@@ -12,12 +12,14 @@
     {% endfor %}
   </ul>
 
+<textarea name='message'></textarea> 
+</br>
+<input type='submit'>
 
-<textarea name='message'></textarea> <input type='submit'>
-
-</br></br>
+</form>
+</br>
+<a href="/profile/{{ username }}">Go back to their Profile</a>
+</br>
 <a href="/profile">Go to your Profile</a>
-
-
 
 {% endblock %}

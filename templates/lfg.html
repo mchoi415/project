@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<form action='/profile/lfg' method='POST'>
+    <div>
+    <input type='radio' id='edit' name='edit' value='add'>
+    <label>Add</label>
+    </br>
+    
+    <input type='radio' id='edit' name='edit' value='remove'>
+    <label>Remove</label>
+    </br>
+
+    <input type='radio' id='edit' name='edit' value='update'>
+    <label>Update</label>
+    </br>
+    </div>
+    </br>
+    <div>
+    <input type='submit' value='Submit'>
+</div>
+</form>
+
+{% endblock %}

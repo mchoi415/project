@@ -4,10 +4,11 @@ from jinja2 import StrictUndefined
 
 from flask import(Flask, render_template, redirect, request, flash, session)
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import func
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
-from model import User, Game, Review, connect_to_db, db
+from model import User, Game, Review, Comment, Group, UserComment, connect_to_db, db
 
 import seed
 
@@ -16,6 +17,159 @@ app = Flask(__name__)
 app.secret_key = 'secret'
 
 app.jinja_env.undefined = StrictUndefined
+
+######################### LFG function #################################
+@app.route('/profile/lfg/update/details', methods=['POST'])
+def update_lfg():
+
+    lfg_comment = request.form.get('comment')
+
+    lfg_id = session['lfg_update']
+    lfg_info = Group.query.filter_by(game_id=lfg_id).first()
+
+    
+    lfg_info.comment = lfg_comment
+    
+    db.session.commit()
+
+
+    return redirect('/profile')
+
+@app.route('/profile/lfg/update/details', methods=['GET'])
+def show_update_lfg():
+
+    lfg_id = session['lfg_update']
+
+    lfg_info = Group.query.filter_by(game_id=lfg_id).first()
+
+    return render_template('lfgUpdate.html', lfg_info=lfg_info)
+
+@app.route('/profile/lfg/update', methods=['POST'])
+def user_pick_lfg():
+    """User pick which game to update."""
+
+    lfg_id = request.form.get('id')
+
+    session['lfg_update'] = lfg_id
+
+    return redirect('/profile/lfg/update/details')
+
+@app.route('/profile/lfg/update', methods=['GET'])
+def show_lfg_list():
+    """Render lfg update list template."""
+
+    user = session['current_user']
+    user = User.query.filter_by(username=user).first()
+    user_id = user.user_id
+
+    user_lfgs = Group.query.filter_by(user_id=user_id)
+
+
+    return render_template('lfgUpdateList.html', user_lfgs=user_lfgs)
+
+@app.route('/profile/lfg/remove', methods=['POST'])
+def remove_lfg():
+    """Remove user's lfg post."""
+
+    lfg = request.form.get('lfg_id')
+    Group.query.filter_by(lfg_id=lfg).delete()
+
+    db.session.commit()
+
+    return redirect('/profile')
+
+@app.route('/profile/lfg/remove', methods=['GET'])
+def show_lfg_remove():
+    """Render remove lfg template."""
+
+    user = session['current_user']
+    user = User.query.filter_by(username=user).first()
+    user_id = user.user_id
+
+    user_lfgs = Group.query.filter_by(user_id=user_id)
+
+    return render_template('lfgRemove.html', lfgs=user_lfgs)
+
+@app.route('/profile/lfg/add/details', methods=['POST'])
+def add_lfg_details():
+    """Add lfg details to DB."""
+
+    user = session['current_user']
+    user = User.query.filter_by(username=user).first()
+    user_id = user.user_id
+
+    game = session['lfg']
+    game = Game.query.filter_by(title=game).first()
+    game_id = game.game_id
+
+    comment = request.form.get('comment')
+
+    new_lfg = Group(game_id=game_id,
+                    user_id=user_id,
+                    comment=comment,
+                    lfg=True)
+
+    db.session.add(new_lfg)
+    db.session.commit()    
+
+
+    return redirect('/profile')
+
+
+@app.route('/profile/lfg/add/details', methods=['GET'])
+def show_lfg_add_details():
+    """Render lfg details template."""
+
+    title = session['lfg']
+
+    return render_template('lfgAddDetails.html', title=title)
+
+
+@app.route('/profile/lfg/add', methods=['POST'])
+def add_lfg():
+    """Get which game from their review list to add a lfg post."""
+
+    game = request.form.get('title')
+    session['lfg'] = game
+  
+    return redirect('/profile/lfg/add/details')
+
+@app.route('/profile/lfg/add', methods=['GET'])
+def show_lfg_add():
+    """Render add lfg template."""
+
+    logged_user = session['current_user']
+    user = User.query.filter_by(username=logged_user).first()
+    user_id = user.user_id
+    games = Review.query.filter_by(user_id=user_id)
+    games = games.join(Game)
+
+
+    return render_template('lfgAdd.html', games=games)
+
+@app.route('/profile/lfg', methods=['POST'])
+def change_lfg():
+    """User update Looking for Group."""
+    edit = request.form.get('edit')
+
+    if edit == 'add':
+        return redirect('/profile/lfg/add')
+
+    if edit == 'remove':
+        return redirect('/profile/lfg/remove')
+
+    if edit == 'update':
+        return redirect('/profile/lfg/update')
+
+
+@app.route('/profile/lfg', methods=['GET'])
+def get_lfg():
+    """Render update lfg template."""
+
+
+    return render_template('lfg.html')
+
+########################## Profile Update Function #####################
 
 @app.route('/profile/update', methods=['POST'])
 def update_profile():
@@ -58,6 +212,7 @@ def profile_update():
 
     return render_template('updateProfile.html', user=user)
 
+############################ Game Info Function ########################
 
 @app.route('/game/<game_id>')
 def show_game_info(game_id):
@@ -66,7 +221,8 @@ def show_game_info(game_id):
 
     game = Game.query.filter_by(game_id=game_id).first()
 
-    return render_template('gameInfo.html', game=game)
+    lfgs = Group.query.filter_by(game_id=game_id)
+    return render_template('gameInfo.html', game=game, lfgs=lfgs)
 
 
 @app.route('/profile/list')
@@ -137,9 +293,7 @@ def get_search_result():
         new_game = Game(title=title,
                         igdb_id=igdb_id,
                         console=consoles,
-                        #fix this
                         game_available_date=game_available_dates,
-                        #fix this
                         genre=genres,
                         url_image=url_image)
         
@@ -181,9 +335,6 @@ def add_game():
     #print game list on console
     print(search_results)
 
-    # for search_result in search_results:
-    # search_results = search_results[0]
-    # title = search_results['name']
     session['title'] = title
 
 
@@ -218,11 +369,6 @@ def add_review():
     user = User.query.filter_by(username=logged_user).first()
     game = Game.query.filter_by(title=title).first()
 
-
-    # logged_id = user_info.user_id
-
-    #Need game ID from DB
-
     #Add new review into DB
     new_review = Review(rating=rating,
                         comment=comment,
@@ -231,10 +377,7 @@ def add_review():
                         game=game
                         )
                         
-                        #Figure out how to get user id from logged in user!
-                        #Figure out how to get game id from user input for title!
-                     
-                      # user_id=User.query.get('user')
+                    
     user.reviews.append(new_review)
         
     db.session.add(new_review)
@@ -248,9 +391,7 @@ def get_review():
     """Get game info from user"""
 
     title = session['title']
-    # get all games from db
-    # give list of gmes to jinja
-    # in jinja make a selext with options that have game info
+  
     return render_template('addGame.html', title=title)
 
 @app.route('/profile/<username>/list')
@@ -263,11 +404,43 @@ def show_other_collection(username):
                            game_reviews=user.reviews,
                            username=username)
 
-@app.route('/profile/<username>/messages')
-def show_other_messages(username):
+@app.route('/profile/<username>/messages', methods=['POST'])
+def upload_other_message(username):
+    """upload user's messages."""
+
+    message = request.form.get('message')
+    author = User.query.filter_by(username=session['current_user']).first()
+    author_id = author.user_id
+
+
+    new_comment = Comment(comment=message,
+                          author_id=author_id)
+
+    
+    db.session.add(new_comment)
+    db.session.commit()
+
+    user = User.query.filter_by(username=username).first()
+    user_id = user.user_id
+    # comment = UserComment.query.filter_by()
+    comment_id = db.session.query(func.max(Comment.comment_id)).scalar()
+    new_user_comment = UserComment(user_id=user_id,
+                                   comment_id=comment_id)
+    
+
+    db.session.add(new_user_comment)
+    db.session.commit()
+
+
+    return redirect(f'/profile/{username}/messages')
+
+@app.route('/profile/<username>/messages', methods=['GET'])
+def show_other_message(username):
     """Show other user messages."""
 
-    return render_template('otherMessages.html')
+    author = User.query.filter_by(username=username).first()
+  
+    return render_template('otherMessages.html', username=username, messages=author.comments)
 
 @app.route('/profile/<username>')
 def show_other_profile(username):
@@ -275,29 +448,48 @@ def show_other_profile(username):
 
     user = User.query.filter_by(username=username).first()
 
-    return render_template('otherProfile.html', user=user)
+    user_id = user.user_id 
+    user_lfgs = Group.query.filter_by(user_id=user_id)
+
+
+    return render_template('otherProfile.html', user=user, user_lfgs=user_lfgs)
 
 @app.route('/profile/messages', methods=['POST'])
 def upload_message():
 
     message = request.form.get('message')
-    author = User.query.filter_by(username=session['username']).first()
-    author_id = user.user_id
+    author = User.query.filter_by(username=session['current_user']).first()
+    author_id = author.user_id
 
 
-    new_comment = Comment(comment= message,
+    new_comment = Comment(comment=message,
                           author_id=author_id)
 
+    db.session.add(new_comment)
+    db.session.commit()
+
+    user_id = author_id
+    # comment = UserComment.query.filter_by()
+    comment_id = db.session.query(func.max(Comment.comment_id)).scalar()
+    new_user_comment = UserComment(user_id=author_id,
+                                   comment_id=comment_id)
     
 
+    db.session.add(new_user_comment)
+    db.session.commit()
     
     return redirect('/profile/messages')
 
 @app.route('/profile/messages', methods=['GET'])
 def show_message():
     """Render user's message board"""
+    
+    author = User.query.filter_by(username=session['current_user']).first()
+    # author_id = author.user_id
 
-    return render_template('messageBoard.html')
+    # messages = UserComment.query.filter_by(user_id=author_id).all()
+
+    return render_template('messageBoard.html', messages=author.comments)
 
 @app.route('/profile')
 def show_profile():
@@ -310,7 +502,10 @@ def show_profile():
     message = request.form.get('message')
     print(message)
 
-    return render_template('profile.html', user=user, other_users=other_users)
+    user_id = user.user_id
+    user_lfgs = Group.query.filter_by(user_id=user_id)
+
+    return render_template('profile.html', user=user, other_users=other_users, lfgs=user_lfgs)
 
 @app.route('/register', methods=['POST'])
 def register_user():
@@ -424,13 +619,19 @@ def show_search_game_info(igdb_game_id):
     if 'release_dates' in game_info.keys():
         release_dates = seed.get_released_date(game_info['release_dates'])
 
+    game_id = Game.query.filter_by(igdb_id=igdb_game_id).first()
+    game_id = game_id.game_id
+
+    lfgs = Group.query.filter_by(game_id=game_id)
+
 
     return render_template('gameSearchInfo.html',
         game_info=game_info,
         cover=game_cover,
         genre=game_genre,
         consoles=game_consoles,
-        release_dates=release_dates)
+        release_dates=release_dates,
+        lfgs=lfgs)
 
 @app.route('/search/results')
 def results_game():

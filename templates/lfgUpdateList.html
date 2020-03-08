@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add LFG</title>
+</head>
+    <body>
+        <form action='/profile/lfg/update' method='POST'>
+            <h2> Which LFG did you want to edit?</h2>
+              
+            {% for user_lfg in user_lfgs %}
+                    <label>{{ user_lfg.game.title }}: [{{ user_lfg.comment }}]</label>
+                    <input type='radio' name='id' value='{{ user_lfg.game_id }}'>
+                </br>
+
+            {% endfor %}                
+                </br>
+                    <input type='submit'>
+
+            </form>
+
+            </br>
+           <a href="/profile">Go back to your profile</a>
+
+
+    </body>
+</html>

@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add LFG</title>
+</head>
+    <body>
+        <form action='/profile/lfg/add' method='POST'>
+            <h2> Which game did you want to add to your LFG list?</h2>
+              
+            {% for game in games %}
+                    <label>{{ game.game.title }}</label>
+                    <input type='radio' name='title' value='{{ game.game.title }}'>
+                </br>
+
+            {% endfor %}                
+                </br>
+                    <input type='submit'>
+
+            </form>
+
+            </br>
+           <a href="/profile">Go back to your profile</a>
+
+
+    </body>
+</html>

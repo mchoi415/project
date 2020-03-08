@@ -19,6 +19,17 @@
     
   </ul>
 
+<h4>Users that have an LFG post to {{ game.title }}</h4>
+  
+  <ul>
+    {% for lfg in lfgs %}
+      <li>
+        <a href="/profile/{{ lfg.user.username }}">
+          {{ lfg.user.username }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
 </br>
 <a href="/profile">Go to your Profile</a>
 

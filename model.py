@@ -30,6 +30,7 @@ class User(db.Model):
     comments = db.relationship('Comment',
                                secondary='users_comments',
                                backref='users')
+    # groupfinders = db.relationship('GroupFinder', secondary='groupfinders', backref='users')
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -72,10 +73,10 @@ class Review(db.Model):
     user = db.relationship("User", backref="reviews")
     game = db.relationship("Game", backref="reviews")
 
-class GroupFinder(db.Model)
+class Group(db.Model):
     """Data model for LFG games."""
 
-    __tablename__ = "groupfinders"
+    __tablename__ = "groups"
 
     lfg_id = db.Column(db.Integer,
                        primary_key=True,
@@ -87,7 +88,7 @@ class GroupFinder(db.Model)
     lfg = db.Column(db.Boolean)
     
     user = db.relationship("User", backref='groupfinders')
-    gmae = db.realtionship("Game", backref='groupfinders')
+    game = db.relationship("Game", backref='groupfinders')
 
 
 class Comment(db.Model):
@@ -111,6 +112,7 @@ class UserComment(db.Model):
     user_comment_id = db.Column(db.Integer,
                                 primary_key=True,
                                 autoincrement=True)
+
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     comment_id = db.Column(db.Integer, db.ForeignKey('comments.comment_id'))
 

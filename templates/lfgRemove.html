@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Remove LFG</title>
+</head>
+<body>
+    <form action='/profile/lfg/remove' method='POST'>
+        
+       <h2>Which LFG would you like to remove?</h2>
+
+        {% for lfg in lfgs %}
+            <label>{{ lfg.game.title }}: [{{ lfg.comment }}]</label>
+            <input type='radio' name='lfg_id' value='{{ lfg.lfg_id }}'>
+        </br>
+
+        {% endfor %}
+
+    </br></br>
+         <input type='submit'>
+
+    </br></br>
+    <a href="/profile">Go back to your profile</a>
+
+
+</form>
+
+</body>
+</html>

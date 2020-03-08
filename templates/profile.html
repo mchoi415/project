@@ -34,7 +34,21 @@
       </li>
   
   </ul>
-  <h3>{{ user.username}}'s' Message Board</h3>
+  
+  <h3> Edit your LFG</h3>
+  <p><a href="/profile/lfg">Edit LFG</a></p>
+
+  <h3> LFG </h3>
+
+  <ul>
+    {% for lfg in lfgs %}
+      <li>
+     {{ lfg.game.title }}: [{{ lfg.comment }}]
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h3>{{ user.username}}'s Message Board</h3>
     <a href="/profile/messages">Message Board</a>
 
   <h4>Other Users</h4>
