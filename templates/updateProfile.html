@@ -1,53 +1,80 @@
 {% extends 'base.html' %}
-
 {% block content %}
 
-    <h2>Current information</h2>
-        Xbox: {{ user.xbox_tag }}
-    </br>
-        PSN: {{ user.psn_tag }}
-    </br>
-        Nintendo: {{ user.nintendo_tag }}
-    </br>
-        Steam: {{ user.steam_tag }}
-    </br>
-        Twitch: {{ user.twitch_tag }}
-    </br>
-        Discord: {{ user.discord_tag }}
 
-    <h3> Update information</h3>
+<h2>Current information</h2>
+    Xbox: {{ user.xbox_tag }}
+</br>
+    PSN: {{ user.psn_tag }}
+</br>
+    Nintendo: {{ user.nintendo_tag }}
+</br>
+    Steam: {{ user.steam_tag }}
+</br>
+    Twitch: {{ user.twitch_tag }}
+</br>
+    Discord: {{ user.discord_tag }}
 
-<form action='/profile/update' method='POST'>
+<div class="update-form">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                <div class="card-header">Update Information</div>
+                <div class="card-body">
+                    
+                    <form action="/profile/update" method="POST">
+                        <div class="form-group row">
+                            <label for="xbox" class="col-md-4 col-form-label text-md-right">Xbox</label>
+                            <div class="col-md-6">
+                                <input type="text" id="xbox" class="form-control" name="xbox" required autofocus>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="psn" class="col-md-4 col-form-label text-md-right">PSN</label>
+                            <div class="col-md-6">
+                            <input type="text" id="psn" class="form-control" name="psn" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="Nintendo" class="col-md-4 col-form-label text-md-right">Nintendo</label>
+                            <div class="col-md-6">
+                            <input type="text" id="nintendo" class="form-control" name="nintendo">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="xbox" class="col-md-4 col-form-label text-md-right">Steam</label>
+                            <div class="col-md-6">
+                            <input type="text" id="steam" class="form-control" name="steam">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="xbox" class="col-md-4 col-form-label text-md-right">Twitch</label>
+                            <div class="col-md-6">
+                            <input type="text" id="twitch" class="form-control" name="twitch">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="xbox" class="col-md-4 col-form-label text-md-right">Discord</label>
+                            <div class="col-md-6">
+                            <input type="text" id="discord" class="form-control" name="discord">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 offset-md-4">
+                            <button type="submit" class="btn btn-primary">Update
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
     
-        <label>Xbox:</label>
-        <input type= 'text' id='xbox' name='xbox'>
 
-    </br></br>
 
-        <label>PSN:</label>
-        <input type='text' id='psn' name='psn'>
-
-    </br></br>
-
-        <label>Nintendo:</label>
-        <input type='text' id='nintendo' name='nintendo'>
-
-    </br></br>
-        
-        <label>Steam:</label>
-        <input type='text' id='steam' name='steam'>
-
-    </br></br>
-
-        <label>Twitch:</label>
-        <input type='text' id='twitch' name='twitch'>
-
-    </br></br>
-
-        <label>Discord:</label>
-        <input type='text' id='discord'name='discord'>
-
-    </br></br>
-
-        <input type='submit' value='Update'>
 {% endblock %}
