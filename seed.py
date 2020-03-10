@@ -19,7 +19,7 @@ def search_games(search):
         'Accept': 'application/json'
     }
 
-    data = 'fields name, platforms, genres, release_dates, cover; limit 50; search "{0}";'.format(search)
+    data = 'fields name, platforms, genres, first_release_date, cover; limit 50; search "{0}";'.format(search)
 
     json_data = requests.get(url=url, headers=headers, data=data).json()
     return json_data
@@ -37,7 +37,7 @@ def get_game_by_id(game_id):
         'Accept': 'application/json'
     }
 
-    data = '''fields name, platforms, genres, release_dates, cover;
+    data = '''fields name, platforms, genres, first_release_date, cover;
               where id = {0};
               limit 5;'''.format(game_id)
     print(data)
@@ -104,18 +104,18 @@ def get_genre(genre_ids):
     return genres
 
 
-def get_released_date(game_availabe_unixs):
+def get_released_date(game_available_unix):
     """Convert unix timestamp into date"""
-    game_avaiable_dates =[]
+    game_available_dates =[]
+        
+    print('*' * 50)
+    print(game_available_unix)
+    print('*' * 50)
 
-    for game_available_unix in game_availabe_unixs:
-    
-        timestamp = datetime.fromtimestamp(game_available_unix)
-        game_available_dates = timestamp.strftime('%d-%m-%y %H:%M:%S')
-        game_avaiable_dates.append(game_available_dates)
+    timestamp = datetime.fromtimestamp(game_available_unix)
+    game_available_date = timestamp.strftime('%m-%d-%Y')
 
-    game_available_dates = str(game_avaiable_dates).strip('[]')
-    return game_available_dates
+    return game_available_date
 
 def get_console(console_ids):
     """Get Console from console ID"""

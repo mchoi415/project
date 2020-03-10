@@ -1,10 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Add LFG</title>
-</head>
-    <body>
         <form action='/profile/lfg/add' method='POST'>
             <h2> Which game did you want to add to your LFG list?</h2>
               
@@ -22,6 +18,4 @@
             </br>
            <a href="/profile">Go back to your profile</a>
 
-
-    </body>
-</html>
+{% endblock %}

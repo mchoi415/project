@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Remove LFG</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
+
     <form action='/profile/lfg/remove' method='POST'>
         
        <h2>Which LFG would you like to remove?</h2>
@@ -24,5 +21,4 @@
 
 </form>
 
-</body>
-</html>
+{% endblock %}

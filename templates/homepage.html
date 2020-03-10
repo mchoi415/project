@@ -1,20 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Welcome!</h1>
-<div>
-    This is a website where you can log your game collection and find other people to game with. With the LFG (Looking For Group) tags, you can easily see if another user is looking for people to play with!
+<div class="container">
+    <div class="col-sm-6">
+    <h1>Welcome!</h1>
+    Game Stack is a website where you can log your game collection and find other people to game with. With the LFG (Looking For Group) tags, you can easily see if another user is looking for people to play with!
 </div>
+<br>
+<div class="row">
+    <div class="col-md-3">
+        <h2>Login</h2>
+        <p><a href="/login">Login</a></p>
+    </div>
 
-<h2>Login</h2>
-<p><a href="/login">Login</a></p>
+    <div class="col-md-3">
+        <h3>Register</h3>
+        <p><a href="/register">Register</a></p>
+    </div>
 
-<h3>Register</h3>
-<p><a href="/register">Register Here</a></p>
-
-<h3>Search Games</h3>
-Want information for a certain game?
-<p><a href="/search">Search here</a></p>
-
+    <div class="col-md-3">
+        <h3>Search Games</h3>
+        Want information for a certain game?
+        <p><a href="/search">Search here</a></p>
+    </div>
+</div>
 {% endblock %}
 

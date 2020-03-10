@@ -7,6 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
+from datetime import datetime
 
 from model import User, Game, Review, Comment, Group, UserComment, connect_to_db, db
 
@@ -264,7 +265,7 @@ def get_search_result():
         igdb_id = search_results['id']
 
         consoles = None
-        game_available_dates = None
+        game_available_date = None
         genres = None
         url_image_id = None
 
@@ -274,9 +275,9 @@ def get_search_result():
             consoles = seed.get_console(console_ids)
           
 
-        if 'release_dates' in search_results.keys():
-            game_availabe_unixs = search_results['release_dates']
-            game_available_dates = seed.get_released_date(game_availabe_unixs)
+        if 'first_release_date' in search_results.keys():
+            game_available_unix = search_results['first_release_date']
+            game_available_date = seed.get_released_date(game_available_unix)
 
         if 'genres' in search_results.keys():
             genre_ids = search_results['genres']
@@ -293,7 +294,7 @@ def get_search_result():
         new_game = Game(title=title,
                         igdb_id=igdb_id,
                         console=consoles,
-                        game_available_date=game_available_dates,
+                        game_available_date=game_available_date,
                         genre=genres,
                         url_image=url_image)
         
@@ -605,7 +606,7 @@ def show_search_game_info(igdb_game_id):
     game_cover = None
     game_genre = None
     game_consoles = None
-    release_dates = None
+    first_release_date = None
 
     if 'cover' in game_info.keys():
         game_cover = seed.get_cover_url_by_id(igdb_game_id)
@@ -616,8 +617,8 @@ def show_search_game_info(igdb_game_id):
     if 'platforms' in game_info.keys():
         game_consoles = seed.get_console(game_info['platforms'])
 
-    if 'release_dates' in game_info.keys():
-        release_dates = seed.get_released_date(game_info['release_dates'])
+    if 'first_release_date' in game_info.keys():
+        first_release_date = seed.get_released_date(game_info['first_release_date'])
 
     game_id = Game.query.filter_by(igdb_id=igdb_game_id).first()
     game_id = game_id.game_id
@@ -630,7 +631,7 @@ def show_search_game_info(igdb_game_id):
         cover=game_cover,
         genre=game_genre,
         consoles=game_consoles,
-        release_dates=release_dates,
+        first_release_date=first_release_date,
         lfgs=lfgs)
 
 @app.route('/search/results')

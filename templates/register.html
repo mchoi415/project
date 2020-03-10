@@ -1,61 +1,92 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Register</title>
-</head>
-<body>
-    <h1> Register </h1>
+{% extends 'base.html' %}
+{% block content %}
 
-    <h3> Required </h3>
-    <form action='/register' method='POST'>
-        <label>Username:</label>
-        <input type="text" id='username' name='username' required='required'>
-    
-    </br></br>
+<div class="register-form">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                <div class="card-header">Register</div>
+                <div class="card-body">
+                    
+                    <form action="/register" method="POST">
+                        <div class="form-group row">
+                            <label for="username" class="col-md-4 col-form-label text-md-right">Username</label>
+                            <div class="col-md-6">
+                                <input type="text" id="username" class="form-control" name="username" required autofocus>
+                            </div>
+                        </div>
 
-        <label>Password:</label>
-        <input type="password" id='password' name='password' required='required'>
-    
-    </br></br>
-    
-        <label>Email:</label>
-        <input type="text" id='email' name= 'email' required='required'>
-    
-    </br></br>
-        
-    <h3> Other optional info </h3>
 
-        <label>Xbox:</label>
-        <input type= 'text' id='xbox' name='xbox'>
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                            <div class="col-md-6">
+                            <input type="password" id="password" class="form-control" name="password" required>
+                            </div>
+                        </div>
 
-    </br></br>
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
+                            <div class="col-md-6">
+                            <input type="text" id="email" class="form-control" name="email" required>
+                            </div>
+                        </div>
 
-        <label>PSN:</label>
-        <input type='text' id='psn' name='psn'>
+                        <div class="header">Optional Info</div>
+                        <br>
 
-    </br></br>
+                        <div class="form-group row">
+                            <label for="xbox" class="col-md-4 col-form-label text-md-right">Xbox</label>
+                            <div class="col-md-6">
+                            <input type="text" id="xbox" class="form-control" name="xbox">
+                            </div>
+                        </div>
 
-        <label>Nintendo:</label>
-        <input type='text' id='nintendo' name='nintendo'>
+                        <div class="form-group row">
+                            <label for="psn" class="col-md-4 col-form-label text-md-right">PSN</label>
+                            <div class="col-md-6">
+                            <input type="text" id="psn" class="form-control" name="psn">
+                            </div>
+                        </div>
 
-    </br></br>
+                        <div class="form-group row">
+                            <label for="nintendo" class="col-md-4 col-form-label text-md-right">Nintendo</label>
+                            <div class="col-md-6">
+                            <input type="text" id="nintendo" class="form-control" name="nintendo">
+                            </div>
+                        </div>
 
-        <label>Steam:</label>
-        <input type='text' id='steam' name='steam'>
+                        <div class="form-group row">
+                            <label for="steam" class="col-md-4 col-form-label text-md-right">Steam</label>
+                            <div class="col-md-6">
+                            <input type="text" id="steam" class="form-control" name="steam">
+                            </div>
+                        </div>
 
-    </br></br>
+                        <div class="form-group row">
+                            <label for="twitch" class="col-md-4 col-form-label text-md-right">Twitch</label>
+                            <div class="col-md-6">
+                            <input type="text" id="twitch" class="form-control" name="twitch">
+                            </div>
+                        </div>
 
-        <label>Twitch:</label>
-        <input type='text' id='twitch' name='twitch'>
+                        <div class="form-group row">
+                            <label for="discord" class="col-md-4 col-form-label text-md-right">Discord</label>
+                            <div class="col-md-6">
+                            <input type="text" id="discord" class="form-control" name="discord">
+                            </div>
+                        </div>
 
-    </br></br>
+                         <div class="col-md-6 offset-md-4">
+                            <button type="submit" class="btn btn-primary">Register
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
 
-        <label>Discord:</label>
-        <input type='text' id='discord'name='discord'>
 
-    </br></br>
-
-        <input type='submit' value='Register'>
-
-</body>
-</html>
+{% endblock %}

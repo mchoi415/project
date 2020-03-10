@@ -1,23 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Search Results</title>
-</head>
-    <body>
-        <form action='/game/results' method='POST'>
-            <h2> Which game did you want to add?</h2>
+<div class="container">
+    <div class="col-md-6">
+    <form action='/game/results' method='POST'>
+    <h2> Which game did you want to add?</h2>
               
-            {% for title in titles %}
-                    <label>{{ title.name }}</label>
-                    <input type='radio' name='title' value='{{ title.id }}'>
-                </br>
+    {% for title in titles %}
+        <label>{{ title.name }}</label>
+        <input type='radio' name='title' value='{{ title.id }}'>
+        </br>
 
-            {% endfor %}                
-                    <label>None of these</label>
-                    <input type='radio' name='title' value='None'>
-                </br></br>
-                    <input type='submit'>
+    {% endfor %}                
+        <label>None of these</label>
+        <input type='radio' name='title' value='None'>
+        </br></br>
+        <input type='submit'>
+    </form>
+</div>
 
-            </body>
-</html>
+{% endblock %}

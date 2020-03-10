@@ -1,18 +1,30 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<h1>This is your profile, {{ user.username }}</h1>
 
-<h3>Your game collection</h3>
-<p><a href="/profile/list">Game Collection</a></p>
+<div class="row">
+  <div class="col-md-6">
+    <h2>This is your profile, {{ user.username }}</h2>
+  </div>
+</div>
 
-<h3>Add game to your collection</h3>
-<p><a href="/game/search">Add game</a></p>
+<div class="row">
+  <div class="col-md-6">
+    <h3>Your game collection</h3>
+    <a href="/profile/list">Game Collection</a>
+  </div>
 
-<h3> Update your platform information </h3>
-<p><a href ="/profile/update">Update profile</a></p>
+  <div class="col-md-6">
+    <h3>Add game to your collection</h3>
+    <p><a href="/game/search">Add game</a></p>
+  </div>
 
-<h3> Your platform Information, {{ user.username }}</h3>
+<div class="col-md-6">
+  <h3> Update your platform information </h3>
+  <p><a href ="/profile/update">Update profile</a></p>
+</div>
+
+ <div class="col-md-6">
+  <h3> Your platform Information, {{ user.username }}</h3>
    <ul>
       <li>
          Xbox: {{ user.xbox_tag }}
@@ -34,10 +46,14 @@
       </li>
   
   </ul>
-  
+</div>
+
+<div class="col-md-6">
   <h3> Edit your LFG</h3>
   <p><a href="/profile/lfg">Edit LFG</a></p>
+</div>
 
+ <div class="col-md-12">
   <h3> LFG </h3>
 
   <ul>
@@ -47,9 +63,14 @@
       </li>
     {% endfor %}
   </ul>
+  </div>
 
+  <div class="col-md-6">
   <h3>{{ user.username}}'s Message Board</h3>
     <a href="/profile/messages">Message Board</a>
+
+  </div>
+ <div class="col-md-6">
 
   <h4>Other Users</h4>
 
@@ -62,6 +83,7 @@
       </li>
     {% endfor %}
   </ul>
+</div>
 
 
 <p><a href="/logout">Log out</a></p>

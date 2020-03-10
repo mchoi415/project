@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Add game to you collection</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
+    
+
     <form action='/game/review' method='POST'>
         <h2>{{ title }}</h2>
         <h2>Rating</h2>
@@ -46,5 +45,4 @@
 
 
 
-</body>
-</html>
+{% endblock %}
