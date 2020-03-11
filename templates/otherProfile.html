@@ -1,52 +1,64 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>This is {{ user.username }}'s profile</h1>
+<div class="profile">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                <div class="card-header">{{ user.username }}'s profile</div>
+                <div class="card-body">
+                  <h6>Their game collection</h6>
+                        <p><a href="/profile/{{ user.username }}/list">Game Collection</a></p>
 
-<h3>Their game collection</h3>
-<p><a href="/profile/{{ user.username }}/list">Game Collection</a></p>
+                  <h6>{{ user.username }}'s LFG (Looking for Group</h6>
 
+                  <ul>
+                    {% for user_lfg in user_lfgs %}
+                    <li>
+                    {{ user_lfg.game.title }}: [{{ user_lfg.comment }}]
+                    </li>
+                    {% endfor %}
+                  </ul>
 
-<h3> Platform Information for {{ user.username }}</h3>
-   <ul>
-      <li>
-         Xbox: {{ user.xbox_tag }}
-      </li>
-      <li>
-         PSN: {{ user.psn_tag }}
-      </li>
-      <li>
-          Nintendo: {{ user.nintendo_tag }}
-      </li>
-      <li>
-          Steam: {{ user.steam_tag }}
-      </li>
-      <li>
-         Twitch: {{ user.twitch_tag }}
-      </li>
-      <li>
-         Discord: {{ user.discord_tag }}
-      </li>
-  
-  </ul>
+                  <h6>{{ user.username}}'s Message Board</h6>
+                 <a href="/profile/messages">Message Board</a>
 
-  <h3> {{ user.username }}'s LFG</h3>
+                </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+            <div class="card">
+            <div class="card-header">Your platform Information</div>
+            <div class="card-body">
+             <ul>
+                <li>
+                   Xbox: {{ user.xbox_tag }}
+                </li>
+                <li>
+                   PSN: {{ user.psn_tag }}
+                </li>
+                <li>
+                    Nintendo: {{ user.nintendo_tag }}
+                </li>
+                <li>
+                    Steam: {{ user.steam_tag }}
+                </li>
+                <li>
+                   Twitch: {{ user.twitch_tag }}
+                </li>
+                <li>
+                   Discord: {{ user.discord_tag }}
+                </li>
+            
+              </ul>
+        </div>
+    </div>
+<br>
 
-  <ul>
-    {% for user_lfg in user_lfgs %}
-      <li>
-     {{ user_lfg.game.title }}: [{{ user_lfg.comment }}]
-      </li>
-    {% endfor %}
-  </ul>
-
-
-  <h3>{{ user.username }}'s Message Board</h3>
-    <a href="/profile/{{ user.username }}/messages">Message Board</a>
-
-  <h4>Go back to your profile</h4>
-  <a href="/profile">Your Profile</a>
-
+  <a href="/profile">Go back to your Profile</a>
+  <br><br>
   <a href="/logout">Log out</a></p>
+
 
 {% endblock %}
