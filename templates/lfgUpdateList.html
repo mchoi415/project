@@ -1,23 +1,38 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
-     <form action='/profile/lfg/update' method='POST'>
-            <h2> Which LFG did you want to edit?</h2>
-              
-            {% for user_lfg in user_lfgs %}
+<div class="add-lfg-form">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                <div class="card-header">Which LFG did you want to edit?</div>
+                <div class="card-body">
+                    
+                    <form action='/profile/lfg/update' method='POST'>
+                    
+                    {% for user_lfg in user_lfgs %}
                     <label>{{ user_lfg.game.title }}: [{{ user_lfg.comment }}]</label>
                     <input type='radio' name='id' value='{{ user_lfg.game_id }}'>
-                </br>
+                    </br>
 
-            {% endfor %}                
-                </br>
-                    <input type='submit'>
-
-            </form>
-
-            </br>
-           <a href="/profile">Go back to your profile</a>
-
+                    {% endfor %}   
+            
+                    </br>
+                    </br>
+                    <div class="col-md-6 offset-md-4">
+                    <button type="submit" class="btn btn-primary">Submit
+                    </button>
+                </div>
+                </form>
+            </div>
+        </div>
+         </br>
+    <a href="/profile">Go back to your profile</a>
+    </div>
+</div>
+</div>
+</div>
 
 {% endblock %}
+

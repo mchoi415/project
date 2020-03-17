@@ -1,23 +1,41 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Message Board</h1>
-<form action='/profile/messages' method="POST">
+<div class="gamelist">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                <div class="card-header">Message Board</div>
+                <div class="card-body">
+                    <form action='/profile/messages' method="POST">
 
-<ul>
-    {% for message in messages %}
-      <li>
-         {{ message.author.username }}: {{ message.comment }} [Time: {{ message.created_at}}]
-      </li>
-    {% endfor %}
-  </ul>
+                    <ul>
+                    {% for message in messages %}
+                    <li>
+                    {{ message.author.username }}: {{ message.comment }} [Time: {{ message.created_at.strftime('%m-%d-%Y, %H:%M:%S') }}]
+                    </li>
+                    {% endfor %}
+                    </ul>
 
-
-<textarea name='message'></textarea> <input type='submit'>
-
-</br></br>
-<a href="/profile">Go to your Profile</a>
-
+                    <br>
+                    <div class="col-md-6">
+                    <textarea name='message'></textarea>
+                    </div>
+                    <br>
+                    <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary">Submit
+                    </button>
+                    </div>
+                    </form>
+                   </div>
+                </div> 
+            </br>
+            <a href="/profile">Go to your Profile</a>
+        </div>
+    </div>
+</div>
+</div>
 
 
 {% endblock %}

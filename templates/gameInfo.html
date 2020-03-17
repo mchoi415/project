@@ -1,38 +1,59 @@
 {% extends 'base.html' %}
-
 {% block content %}
 
-<h3> {{ game.title }} </h3>
-   <ul>
-    <li>
-        Game Cover : <img src="{{ game.url_image }}" alt=" {{ game.title }}">
-      </li>
-      <li>
-         Platform(s): {{ game.console }}
-      </li>
-      <li>
-         Release Date(s): {{ game.game_available_date }}
-      </li>
-      <li>
-         Genre(s): {{ game.genre }}
-      </li>
-    
-  </ul>
 
-<h4>Users that have an LFG post to {{ game.title }}</h4>
-  
-  <ul>
-    {% for lfg in lfgs %}
-      <li>
-        <a href="/profile/{{ lfg.user.username }}">
-          {{ lfg.user.username }}
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
-</br>
-<a href="/profile">Go to your Profile</a>
+<div class="game-info">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                <div class="card-header">{{ game.title }}</div>
+                <div class="card-body">
+                  <table>
+                  <tr>
+                  <td>
+                       <img src="{{ game.url_image }}" alt=" {{ game.title }}"> </td>
+                    <td>
+                    <ul>
+                    <li>
+                       Platform(s): {{ game.console }}
+                    </li>
+                    <li>
+                       Release Date(s): {{ game.game_available_date }}
+                    </li>
+                    <li>
+                       Genre(s): {{ game.genre }}
+                    </li>
+                  </ul>
+                  </td>
+                  </tr>
+                  </table>  
+                </div>
+              </div>
+            </div>
+          </div>
+  </div>
+<br>
+  <div class="game-info">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">LFG posts for {{ game.title }}</div>
+                <div class="card-body">
+               <ul>
+              {% for lfg in lfgs %}
+              <li>
+            <a href="/profile/{{ lfg.user.username }}">{{ lfg.user.username }}</a>: [{{ lfg.comment }}]
+          </li>
+          {% endfor %}
+          </ul>
+        </div>
+</div>
+<br>
+<a href="/profile">Go back to your profile</a>
+</div>
+</div>
 
-<p><a href="/logout">Log out</a></p>
 
 {% endblock %}

@@ -1,22 +1,36 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <h6>Add game to yor LFG List</h6>
+<div class="search-game-form">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                <div class="card-header">{{ title }}</div>
+                <div class="card-body">
 
-    <form action='/profile/lfg/add/details' method='POST'>
-        <h1> {{ title }} </h1>
+                <form action='/profile/lfg/add/details' method='POST'>
 
-        <h2>Comments</h2>
-        Example: "Looking for a dps in my group!"
-    </br>
+                <h6>Comments</h6>
+                [Example: "Looking for a dps in my group!"]
+                 </br></br>
 
-        <textarea name='comment'></textarea>
+                <textarea name='comment'></textarea>
 
-    </br></br>
+                </br></br>
 
-        <input type='submit'>
+                <div class="col-md-6 offset-md-4">
+                <button type="submit" class="btn btn-primary">Submit
+                </button>
+                </div>
 
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 
-</form>
 
 {% endblock %}

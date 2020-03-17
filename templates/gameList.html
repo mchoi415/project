@@ -1,20 +1,28 @@
 {% extends 'base.html' %}
-
 {% block content %}
 
-<h2>Game Collection</h2>
+<div class="gamelist">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                <div class="card-header">Game Collection</div>
+                <div class="card-body">
+                  <ul>
+                  {% for game_review in game_reviews %}
+                  <li>
+                  Title:<a href="/game/{{ game_review.game.game_id }}">
+                  {{ game_review.game.title }} 
+                  </a>| Rating: {{ game_review.rating }} out of 5 | Comments: {{ game_review.comment }} | Start Date: {{ game_review.start_date.strftime('%m-%d-%Y') }} | Finished Date: {{ game_review.finish_date }}
+                  </a>
+                  </li>
+                  {% endfor %}
+                  </ul>
 
-  <ul>
-    {% for game_review in game_reviews %}
-      <li>
-          Title:<a href="/game/{{ game_review.game.game_id }}">
-         {{ game_review.game.title }} 
-        </a>| Rating: {{ game_review.rating }} out of 5 | Comments: {{ game_review.comment }} | Start Date: {{ game_review.start_date }} | Finished Date: {{ game_review.finish_date }}
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
+                </div>
+                </div>
 
+<br><br>
   <a href="/profile">Go to your Profile</a>
 
 {% endblock %}

@@ -439,6 +439,8 @@ def upload_other_message(username):
 def show_other_message(username):
     """Show other user messages."""
 
+    print(username)
+
     author = User.query.filter_by(username=username).first()
   
     return render_template('otherMessages.html', username=username, messages=author.comments)
@@ -601,7 +603,6 @@ def show_search_game_info(igdb_game_id):
     """"Show searched game info."""
 
     game_info = seed.get_game_by_id(igdb_game_id)[0]
-    print(game_info)
     
     game_cover = None
     game_genre = None
@@ -619,20 +620,36 @@ def show_search_game_info(igdb_game_id):
 
     if 'first_release_date' in game_info.keys():
         first_release_date = seed.get_released_date(game_info['first_release_date'])
+    
+    lfg_game = Game.query.filter_by(igdb_id=igdb_game_id).first()
+    if lfg_game != None:
+        game_id = lfg_game.game_id
+        
+        lfgs = Group.query.filter_by(game_id=game_id)
 
-    game_id = Game.query.filter_by(igdb_id=igdb_game_id).first()
-    game_id = game_id.game_id
-
-    lfgs = Group.query.filter_by(game_id=game_id)
-
-
-    return render_template('gameSearchInfo.html',
+        return render_template('gameSearchInfo.html',
+                                game_info=game_info,
+                                cover=game_cover,
+                                genre=game_genre,
+                                consoles=game_consoles,
+                                first_release_date=first_release_date,
+                                lfgs=lfgs)
+    else:
+        return render_template('gameSearchInfo.html',
+                                game_info=game_info,
+                                cover=game_cover,
+                                genre=game_genre,
+                                consoles=game_consoles,
+                                first_release_date=first_release_date,
+                                lfgs=[])
+            
+        return render_template('gameSearchInfo.html',
         game_info=game_info,
         cover=game_cover,
         genre=game_genre,
         consoles=game_consoles,
-        first_release_date=first_release_date,
-        lfgs=lfgs)
+        first_release_date=first_release_date)
+
 
 @app.route('/search/results')
 def results_game():
@@ -672,7 +689,7 @@ def homepage():
 
 if __name__=='__main__':
 
-    app.debug= True
+    app.debug= False
 
     app.jinja_env.auto_reload = app.debug
 

@@ -1,17 +1,37 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <h2>Current LFG info</h2>
-        Game: {{ lfg_info.game.title }}
-    </br>
-        Comment: {{ lfg_info.comment }}
-</br>
-    <h3> Edit Comment </h3>
+<div class="update-lfg-form">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                <div class="card-header">Update LFG</div>
+                <div class="card-body">
+                    
+                    <form action='/profile/lfg/update/details' method='POST'>
+                    
+                         <h6>Current LFG info</h6>
+                        Game: {{ lfg_info.game.title }}
+                       <br>
+                        Comment: [{{ lfg_info.comment }}]
+                    <br><br>
 
-<form action='/profile/lfg/update/details' method='POST'>
-    
-        <textarea name='comment'></textarea>
-    </br></br>
+                    <textarea name='comment'></textarea>
 
-        <input type='submit' value='Update'>
+                    </br>
+                    <div class="col-md-6 offset-md-4">
+                    <button type="submit" class="btn btn-primary">Update
+                    </button>
+                </div>
+                </form>
+            </div>
+        </div>
+         </br>
+    <a href="/profile">Go back to your profile</a>
+    </div>
+</div>
+</div>
+</div>
+
 {% endblock %}

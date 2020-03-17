@@ -1,25 +1,39 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
-<form action='/profile/lfg' method='POST'>
-    <div>
-    <input type='radio' id='edit' name='edit' value='add'>
-    <label>Add</label>
-    </br>
+<div class="search-game-form">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                <div class="card-header">LFG</div>
+                <div class="card-body">
+                    <form action='/profile/lfg' method='POST'>
+                    <div>
+                    <input type='radio' id='edit' name='edit' value='add'>
+                    <label>Add</label>
+                    </br>
     
-    <input type='radio' id='edit' name='edit' value='remove'>
-    <label>Remove</label>
-    </br>
+                    <input type='radio' id='edit' name='edit' value='remove'>
+                    <label>Remove</label>
+                    </br>
 
-    <input type='radio' id='edit' name='edit' value='update'>
-    <label>Update</label>
-    </br>
+                    <input type='radio' id='edit' name='edit' value='update'>
+                    <label>Update</label>
+                    </br>
+                    </div>
+                    </br>
+                    <div class="col-md-6 offset-md-4">
+                    <button type="submit" class="btn btn-primary">Submit
+                    </button>
+                </div>
+                </form>
+            </div>
+        </div>
     </div>
-    </br>
-    <div>
-    <input type='submit' value='Submit'>
 </div>
-</form>
+</div>
+</div>
+
 
 {% endblock %}

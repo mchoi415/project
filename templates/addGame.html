@@ -1,46 +1,58 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    
 
-    <form action='/game/review' method='POST'>
-        <h2>{{ title }}</h2>
-        <h2>Rating</h2>
-        <label>1</label>
-        <input type='radio' name='rating' value=1>
-        <label>2</label>
-        <input type='radio' name='rating' value=2>
-        <label>3</label>
-        <input type='radio' name='rating' value=3>
-        <label>4</label>
-        <input type='radio' name='rating' value=4>
-        <label>5</label>
-        <input type='radio' name='rating' value=5>
-    </br></br>
+<div class="search-game-form">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                <div class="card-header">{{ title }}</div>
+                <div class="card-body">
 
-        <h2>Comments</h2>
+                <form action='/game/review' method='POST'>
+                <h6>Rating</h6>
+                <label>1</label>
+                <input type='radio' name='rating' value=1>
+                <label>2</label>
+                <input type='radio' name='rating' value=2>
+                <label>3</label>
+                <input type='radio' name='rating' value=3>
+                <label>4</label>
+                <input type='radio' name='rating' value=4>
+                <label>5</label>
+                <input type='radio' name='rating' value=5>
+            </br></br>
+
+        <h6>Comments</h6>
 
         <textarea name='comment'></textarea>
 
     </br></br>
 
-        <h2>Start Date</h2>
-        <!--- figure out how to fix this---->
+
 
         <label for="start">Start date:</label>
         <input type="date" id='date' name='start_date'>
 
      </br></br>
 
-        <h2>End Date</h2>
-        <!--- figure out how to fix this --->
 
         <label for="start">Completed date:</label>
         <input type="date" id='date' name='end_date'>
 
     </br></br>
 
-        <input type='submit'>
+                <div class="col-md-6 offset-md-4">
+                    <button type="submit" class="btn btn-primary">Submit
+                    </button>
+                </div>
+             </form>
+            </div>
+           </div>
+          </div>
+          </div>
+
 
 
 

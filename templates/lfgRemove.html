@@ -1,24 +1,43 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <form action='/profile/lfg/remove' method='POST'>
-        
-       <h2>Which LFG would you like to remove?</h2>
+<div class="add-lfg-form">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                <div class="card-header">Which LFG would you like to remove?</div>
+                <div class="card-body">
+                    
+                    <form action='/profile/lfg/remove' method='POST'>
+                    
+                    {% for lfg in lfgs %}
+                    <label>{{ lfg.game.title }}: [{{ lfg.comment }}]</label>
+                    <input type='radio' name='lfg_id' value='{{ lfg.lfg_id }}'>
+                    </br>
 
-        {% for lfg in lfgs %}
-            <label>{{ lfg.game.title }}: [{{ lfg.comment }}]</label>
-            <input type='radio' name='lfg_id' value='{{ lfg.lfg_id }}'>
-        </br>
-
-        {% endfor %}
-
-    </br></br>
-         <input type='submit'>
-
-    </br></br>
+                    {% endfor %}
+            
+                    </br>
+                    </br>
+                    <div class="col-md-6 offset-md-4">
+                    <button type="submit" class="btn btn-primary">Submit
+                    </button>
+                </div>
+                </form>
+            </div>
+        </div>
+         </br>
     <a href="/profile">Go back to your profile</a>
-
-
-</form>
+    </div>
+</div>
+</div>
+</div>
 
 {% endblock %}
+
+
+
+
+
+    
