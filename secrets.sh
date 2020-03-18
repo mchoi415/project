@@ -1,1 +1,0 @@
-export IGDB_KEY="97bc20f840f5a7f739642f1b0615bb37"
