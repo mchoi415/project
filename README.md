@@ -75,7 +75,7 @@ _________
 #### Landing Page
 <img src="/static/images/landing-page.jpg">
 
-__________
+
 
 
 You can log in, register, or even search for a game that you might be interested in.
@@ -83,33 +83,33 @@ You can log in, register, or even search for a game that you might be interested
 #### Register
 <img src="/static/images/register.jpg">
 
-__________
+
 
 When you register, you will need to input a username, password, and email address. You can optionally provide are your Xbox, PSN, Nintendo, Steam, Twitch, and Discord tags to share on your profile. 
 
 #### Login
-__________
+
 
 <img src="/static/images/login.jpg">
 
 If you are already a registered member, you can log in with the username and password provided at registration to go to your profile page.
 
 #### Profile Page
-__________
+
 
 <img src="/static/images/user-profile.jpg">
 
 On your profile, you can easily see and access your game collection, LFG (Looking for Group) posts, a message board, your gamer tags, and other users to the right of your profile.
 
 #### Game Collection
-__________
+
 
 <img src="/static/images/game-collection.jpg">
 
 This is an example of what a game collection would look like. You can add reviews, ratings, and your start and end dates for each game.
 
 #### LFG (Looking for Group)
-__________
+
 
 <img src="/static/images/lfg-posts.jpg">
 <img src="/static/images/lfg-options.jpg">
@@ -117,7 +117,7 @@ __________
 On your profile, you will have the option to add, remove, or even update a current LFG post. These LFG posts will be shown on your profile and will also show up a user searches for that game.
 
 #### Search for a Game
-__________
+
 
 <img src="/static/images/search-game.jpg">
 
