@@ -15,7 +15,7 @@ def search_games(search):
 
     url = 'https://api-v3.igdb.com/games'
     headers = {
-        'user-key':'97bc20f840f5a7f739642f1b0615bb37',
+        'user-key':IGDB_KEY,
         'Accept': 'application/json'
     }
 
